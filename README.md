@@ -21,7 +21,6 @@ First, install the dependencies:
 bun install
 ```
 
-
 Then, run the development server:
 
 ```bash
@@ -30,10 +29,6 @@ bun dev
 
 Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
 The API is running at [http://localhost:3000](http://localhost:3000).
-
-
-
-
 
 ## Project Structure
 
@@ -51,3 +46,4 @@ chuck-norris-jokes/
 - `bun dev:web`: Start only the web application
 - `bun dev:server`: Start only the server
 - `bun check-types`: Check TypeScript types across all apps
+- `bun prettier`: Format codebase according to current prettier settings
