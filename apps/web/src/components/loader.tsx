@@ -1,9 +1,5 @@
-import { Loader2 } from "lucide-react";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 
-export default function Loader() {
-	return (
-		<div className="flex h-full items-center justify-center pt-8">
-			<Loader2 className="animate-spin" />
-		</div>
-	);
+export function Loader({ children = "Loading..." }: { children: string }) {
+  return <TextShimmer>{children}</TextShimmer>;
 }
