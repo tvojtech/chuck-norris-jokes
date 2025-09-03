@@ -9,7 +9,8 @@
     "serve": "vite preview",
     "start": "vite",
     "check-types": "tsc --noEmit",
-    "prettier": "bunx prettier . --write"
+    "prettier": "bunx prettier . --write",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
