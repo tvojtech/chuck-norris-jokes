@@ -1,12 +1,12 @@
-import { zodValidator } from "@tanstack/zod-adapter";
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
-import z from "zod";
-import { Filters } from "@/pages/homepage/Filters";
-import { JokeView } from "@/pages/homepage/JokeView";
+import { zodValidator } from '@tanstack/zod-adapter';
+import { createFileRoute, stripSearchParams } from '@tanstack/react-router';
+import z from 'zod';
+import { Filters } from '@/pages/homepage/Filters';
+import { JokeView } from '@/pages/homepage/JokeView';
 
 const defaultValues = {
-  search: "",
-  category: "",
+  search: '',
+  category: '',
 };
 
 const searchSchema = z.object({
@@ -14,7 +14,7 @@ const searchSchema = z.object({
   category: z.string().optional().default(defaultValues.category),
 });
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: HomeComponent,
   validateSearch: zodValidator(searchSchema),
   search: {
@@ -32,9 +32,9 @@ function HomeComponent() {
         <div>
           <Filters
             filters={filters}
-            onFiltersChange={(filters) => {
+            onFiltersChange={filters => {
               navigate({
-                search: (prev) => ({
+                search: prev => ({
                   ...prev,
                   search: filters.search,
                   category: filters.category,

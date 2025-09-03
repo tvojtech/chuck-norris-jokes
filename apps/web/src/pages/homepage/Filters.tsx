@@ -1,19 +1,13 @@
-import { Loader } from "@/components/loader";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import type { Filters } from "@/pages/homepage/types";
-import { trpc } from "@/utils/trpc";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { Filter, FilterX, SearchCheck } from "lucide-react";
-import { Suspense, useState } from "react";
+import { Loader } from '@/components/loader';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import type { Filters } from '@/pages/homepage/types';
+import { trpc } from '@/utils/trpc';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { Filter, FilterX, SearchCheck } from 'lucide-react';
+import { Suspense, useState } from 'react';
 
 export function Filters({
   filters,
@@ -38,7 +32,7 @@ function FiltersInternal({
   filters: Filters;
   onFiltersChange: (filters: Filters) => void;
 }) {
-  const anyFilter = Object.values(filters).some((val) => !!val);
+  const anyFilter = Object.values(filters).some(val => !!val);
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedFilters, setEditedFilters] = useState<Filters>(filters);
@@ -63,11 +57,7 @@ function FiltersInternal({
             </Button>
           )}
           {!isEditing && (
-            <Button
-              variant="default"
-              size="icon"
-              onClick={() => setIsEditing(true)}
-            >
+            <Button variant="default" size="icon" onClick={() => setIsEditing(true)}>
               <Filter />
             </Button>
           )}
@@ -90,8 +80,8 @@ function FiltersInternal({
           <div className="flex flex-col gap-2">
             <Input
               placeholder="Search category..."
-              value={editedFilters.search || ""}
-              onChange={(e) =>
+              value={editedFilters.search || ''}
+              onChange={e =>
                 setEditedFilters({
                   search: e.target.value,
                   category: undefined,
@@ -101,9 +91,7 @@ function FiltersInternal({
             <Suspense fallback={<Loader>Loading categories...</Loader>}>
               <Categories
                 category={editedFilters.category}
-                onCategoryChange={(category) =>
-                  setEditedFilters({ category, search: undefined })
-                }
+                onCategoryChange={category => setEditedFilters({ category, search: undefined })}
               />
             </Suspense>
           </div>
@@ -124,16 +112,19 @@ function Categories({
 
   return (
     <div className="flex flex-wrap gap-2">
-      {categories.data.map((category) => (
-        <Badge
-          key={category}
-          variant={category === selectedCategory ? "default" : "outline"}
-          onClick={() => onCategoryChange(category)}
-          className="cursor-pointer"
-        >
-          {category}
-        </Badge>
-      ))}
+      {categories.isError ? (
+        <p className="text-red-600">Error loading categories.</p>
+      ) : (
+        categories.data.map(category => (
+          <Badge
+            key={category}
+            variant={category === selectedCategory ? 'default' : 'outline'}
+            onClick={() => onCategoryChange(category)}
+            className="cursor-pointer">
+            {category}
+          </Badge>
+        ))
+      )}
     </div>
   );
 }

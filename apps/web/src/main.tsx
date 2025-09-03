@@ -1,33 +1,32 @@
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import ReactDOM from "react-dom/client";
-import PageLoader from "./components/page-loader";
-import { routeTree } from "./routeTree.gen";
+import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router';
+import ReactDOM from 'react-dom/client';
+import PageLoader from './components/page-loader';
+import { routeTree } from './routeTree.gen';
 
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient, trpc } from "./utils/trpc";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient, trpc } from './utils/trpc';
 
 const router = createRouter({
   routeTree,
-  defaultPreload: "intent",
+  defaultPreload: 'intent',
   defaultPendingComponent: () => <PageLoader />,
+  defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
   context: { trpc, queryClient },
   Wrap: function WrapComponent({ children }: { children: React.ReactNode }) {
-    return (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
   },
 });
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;
   }
 }
 
-const rootElement = document.getElementById("app");
+const rootElement = document.getElementById('app');
 
 if (!rootElement) {
-  throw new Error("Root element not found");
+  throw new Error('Root element not found');
 }
 
 if (!rootElement.innerHTML) {
