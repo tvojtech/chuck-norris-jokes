@@ -1,7 +1,8 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { Filter, FilterX, SearchCheck } from 'lucide-react';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 
+import { ErrorMessage } from '@/components/ErrorMessage';
 import { Loader } from '@/components/loader';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -89,12 +90,10 @@ function FiltersInternal({
                 })
               }
             />
-            <Suspense fallback={<Loader>Loading categories...</Loader>}>
-              <Categories
-                category={editedFilters.category}
-                onCategoryChange={category => setEditedFilters({ category, search: undefined })}
-              />
-            </Suspense>
+            <Categories
+              category={editedFilters.category}
+              onCategoryChange={category => setEditedFilters({ category, search: undefined })}
+            />
           </div>
         )}
       </CardContent>
@@ -109,14 +108,16 @@ function Categories({
   category?: string;
   onCategoryChange: (category: string) => void;
 }) {
-  const categories = useSuspenseQuery(trpc.jokeCategories.queryOptions());
+  const categories = useQuery(trpc.jokeCategories.queryOptions());
 
   return (
     <div className="flex flex-wrap gap-2">
       {categories.isError ? (
-        <p className="text-red-600">Error loading categories.</p>
+        <ErrorMessage>Error loading categories.</ErrorMessage>
+      ) : categories.isFetching ? (
+        <Loader>Loading categories...</Loader>
       ) : (
-        categories.data.map(category => (
+        categories.data?.map(category => (
           <Badge
             key={category}
             variant={category === selectedCategory ? 'default' : 'outline'}

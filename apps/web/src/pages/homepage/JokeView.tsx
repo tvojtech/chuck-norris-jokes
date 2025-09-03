@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { RefreshCcw } from 'lucide-react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
+import { ErrorMessage } from '@/components/ErrorMessage';
 import { Loader } from '@/components/loader';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -34,7 +35,7 @@ export function JokeView({ filters: { search, category } }: { filters: Filters }
       </CardHeader>
       <CardContent>
         {joke.isError ? (
-          <p>An error occurred</p>
+          <ErrorMessage>Failed to load a joke</ErrorMessage>
         ) : joke.isFetching ? (
           <Loader>Loading a joke...</Loader>
         ) : !joke.data ? (
