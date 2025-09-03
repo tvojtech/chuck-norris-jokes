@@ -40,6 +40,12 @@ chuck-norris-jokes/
 │   └── server/      # Backend API (Hono, TRPC)
 ```
 
+### Possible improvements
+
+- Creating separate package for UI components managed by shadcn - smth like `packages/ui`
+- Creating separate packages for features - smth like `packages/features/feature1`, `packages/features/feature2`, etc.
+- Different ESLint/Prettier configurations for workspace packages. Server and Web config are usually different. Creating a base config files package would make sense too.
+
 ## Available Scripts
 
 - `bun dev`: Start all applications in development mode
