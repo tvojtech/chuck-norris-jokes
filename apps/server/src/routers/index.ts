@@ -1,8 +1,10 @@
-import type { Joke } from '@/types';
-import { publicProcedure, router } from '../lib/trpc';
-import { env } from '@/env';
 import z from 'zod';
+
+import { env } from '@/env';
+import type { Joke } from '@/types';
 import { delay } from '@/utils';
+
+import { publicProcedure, router } from '../lib/trpc';
 
 export const appRouter = router({
   jokeCategories: publicProcedure.query(async () => {
@@ -27,7 +29,7 @@ export const appRouter = router({
       const params = new URLSearchParams();
 
       if (input.search) {
-        input.search && params.append('query', input.search);
+        if (input.search) params.append('query', input.search);
         const response = await fetch(`${apiBase}/jokes/search?${params.toString()}`);
         if (response.ok) {
           const body = (await response.json()).result as Joke[];
@@ -35,7 +37,7 @@ export const appRouter = router({
         }
         throw Error(response.statusText, { cause: response.status });
       } else {
-        input.category && params.append('category', input.category);
+        if (input.category) params.append('category', input.category);
         const response = await fetch(`${apiBase}/jokes/random?${params.toString()}`);
         if (response.ok) {
           return (await response.json()) as Joke;

@@ -1,9 +1,9 @@
-import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { createRouter, ErrorComponent, RouterProvider } from '@tanstack/react-router';
 import ReactDOM from 'react-dom/client';
+
 import PageLoader from './components/page-loader';
 import { routeTree } from './routeTree.gen';
-
-import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient, trpc } from './utils/trpc';
 
 const router = createRouter({

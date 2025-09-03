@@ -1,6 +1,7 @@
-import { zodValidator } from '@tanstack/zod-adapter';
 import { createFileRoute, stripSearchParams } from '@tanstack/react-router';
+import { zodValidator } from '@tanstack/zod-adapter';
 import z from 'zod';
+
 import { Filters } from '@/pages/homepage/Filters';
 import { JokeView } from '@/pages/homepage/JokeView';
 

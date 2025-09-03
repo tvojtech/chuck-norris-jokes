@@ -1,3 +1,7 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { Filter, FilterX, SearchCheck } from 'lucide-react';
+import { Suspense, useState } from 'react';
+
 import { Loader } from '@/components/loader';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -5,9 +9,6 @@ import { Card, CardAction, CardContent, CardHeader, CardTitle } from '@/componen
 import { Input } from '@/components/ui/input';
 import type { Filters } from '@/pages/homepage/types';
 import { trpc } from '@/utils/trpc';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { Filter, FilterX, SearchCheck } from 'lucide-react';
-import { Suspense, useState } from 'react';
 
 export function Filters({
   filters,

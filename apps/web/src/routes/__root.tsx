@@ -1,13 +1,15 @@
+import '../index.css';
+
+import type { QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { createRootRouteWithContext, HeadContent, Outlet, useRouterState } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+
 import Header from '@/components/header';
+import PageLoader from '@/components/page-loader';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import type { trpc } from '@/utils/trpc';
-import type { QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { HeadContent, Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import '../index.css';
-import PageLoader from '@/components/page-loader';
 
 export interface RouterAppContext {
   trpc: typeof trpc;
