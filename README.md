@@ -19,6 +19,7 @@ First, install the dependencies:
 
 ```bash
 bun install
+bun prepare # to make pre-commit hooks work
 ```
 
 Then, run the development server:
@@ -47,3 +48,5 @@ chuck-norris-jokes/
 - `bun dev:server`: Start only the server
 - `bun check-types`: Check TypeScript types across all apps
 - `bun prettier`: Format codebase according to current prettier settings
+- `bun lint`: Run linter
+- `bun prepare`: Setup precommit hooks
